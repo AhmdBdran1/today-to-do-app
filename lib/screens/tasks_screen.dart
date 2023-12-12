@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:todaydo_app/models/task_data.dart';
 import 'package:todaydo_app/screens/add_task_screen.dart';
-
 import '../widgets/tasks_list.dart';
+import 'package:provider/provider.dart';
 
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,12 @@ class TasksScreen extends StatelessWidget {
               builder: (context)=> SingleChildScrollView(
                   child: Container(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: AddTaskScreen()
+                      child: AddTaskScreen(addNewTask: (String taskTitle){
+                        // setState(() {
+                        //   tasks.add(Task(name: taskTitle));
+                        //   Navigator.pop(context);
+                        // });
+                      })
                   )
               ));
         },
@@ -45,7 +51,7 @@ class TasksScreen extends StatelessWidget {
               ],
             ),
 
-            Text('4 Tasks',style: TextStyle(
+            Text('${Provider.of<TaskData>(context).tasks.length} Tasks',style: TextStyle(
               color: Colors.white,
               fontSize: 18,
             ),),
